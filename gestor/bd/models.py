@@ -2,6 +2,11 @@ from django.db import models
 
 # Create your models here.
 
+def cifrar(cadena, clave):
+    return cadena
+
+def descifrar(cadena, clave):
+    return cadena
 
 class Grupo(models.Model):
     nombre  =   models.CharField(max_length=8)

@@ -81,7 +81,7 @@ DATABASES = {
     }
 }
 
-MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'fotos'),
+MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'fotos')
 
 
 # Password validation
