@@ -69,7 +69,8 @@ class Modulo(models.Model):
     horas_semana    =   models.IntegerField()
     grupo           =   models.ForeignKey(Grupo)
     horas_anuales   =   models.IntegerField()
-    
+    class Meta:
+        ordering = ["nombre"]
     def __str__(self):
         return self.nombre
     
@@ -90,7 +91,7 @@ class Alumno(models.Model):
     modular             =   models.BooleanField(blank=True)
     inmigrante          =   models.BooleanField(blank=True)
     repetidor           =   models.BooleanField(blank=True)
-    emancipada          =   models.BooleanField(blank=True)
+    esta_emancipado     =   models.BooleanField(blank=True)
     comentarios         =   models.TextField(blank=True)
     
     
@@ -102,7 +103,9 @@ class Alumno(models.Model):
     
 class Calificacion(models.Model):
     alumno      =       models.ForeignKey ( Alumno )
-    calificacion=       models.IntegerField(blank=True)
-    conv        =       models.BooleanField()
-    apro        =       models.BooleanField()
+    modulo      =       models.ForeignKey( Modulo )
+    calificacion=       models.IntegerField(blank=True, null=True)
+    conv        =       models.NullBooleanField()
+    apro        =       models.NullBooleanField()
+    ev          =       models.IntegerField()
     

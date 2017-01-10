@@ -1,0 +1,22 @@
+{%extends 'bd/base.html' %}
+
+
+{%block contenido%}
+<h1>Acta evaluacion {{num_eval}}</h1>
+<table border='1'>
+    <thead>
+        <tr>
+            {%for e in encabezamientos%}
+            <th>{{e}}</th>
+            {%endfor%}
+        </tr>
+    </thead>
+    {% for fila in filas%}
+    <tr>
+        {%for dato in fila%}
+            <td>{{dato}}</td>
+        {%endfor%}
+    </tr>
+    {%endfor%}
+</table>
+{%endblock%}
