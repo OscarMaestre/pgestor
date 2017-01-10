@@ -45,7 +45,7 @@ class Grupo(models.Model):
     def __str__(self):
         return self.nombre
 
-@receiver(pre_save, sender=Grupo)
+#@receiver(pre_save, sender=Grupo)
 def almacenar_grupo(sender, **kwargs):
     instancia=kwargs["instance"]
     nombre=instancia.nombre
@@ -54,7 +54,7 @@ def almacenar_grupo(sender, **kwargs):
     instancia.nombre=nombre_cifrado
     kwargs["instance"]=instancia
 
-@receiver(post_init, sender=Grupo)
+#@receiver(post_init, sender=Grupo)
 def cargar_grupo(sender, **kwargs):
     instancia=kwargs["instance"]
     nombre=instancia.nombre
@@ -68,18 +68,41 @@ class Modulo(models.Model):
     nombre          =   models.CharField(max_length=120)
     horas_semana    =   models.IntegerField()
     grupo           =   models.ForeignKey(Grupo)
+    horas_anuales   =   models.IntegerField()
     
     def __str__(self):
         return self.nombre
     
 class Alumno(models.Model):
-    apellido1           =   models.CharField(max_length=60)
-    apellido2           =   models.CharField(max_length=60)
+    dni                 =   models.CharField(max_length=12, blank=True)
+    apellidos           =   models.CharField(max_length=140)
     nombre              =   models.CharField(max_length=60)
-    fecha_nacimiento    =   models.DateField()
-    dni                 =   models.CharField(max_length=12)
-    num_exp             =   models.CharField(max_length=10)
-    foto                =   models.ImageField(upload_to="fotos")
-    modulos             =   models.ManyToManyField(Modulo)
-    modular             =   models.BooleanField()
-    inmigrante          =   models.BooleanField()
+    fecha_nacimiento    =   models.DateField(blank=True, null=True)
+    email               =   models.EmailField(blank=True)
+    dir_postal          =   models.CharField(max_length=140, blank=True)
+    tlf_urgencia_1      =   models.CharField(max_length=12, blank=True)
+    tlf_urgencia_2      =   models.CharField(max_length=12, blank=True)
+    num_exp             =   models.CharField(max_length=10, blank=True)
+    foto                =   models.ImageField(upload_to="fotos", blank=True)
+    matricula           =   models.ManyToManyField(Modulo, related_name="matriculas")
+    convalidaciones     =   models.ManyToManyField(Modulo, related_name="convalidaciones", blank=True)
+    mods_aprobados      =   models.ManyToManyField(Modulo, related_name="aprobados", blank=True)
+    modular             =   models.BooleanField(blank=True)
+    inmigrante          =   models.BooleanField(blank=True)
+    repetidor           =   models.BooleanField(blank=True)
+    emancipada          =   models.BooleanField(blank=True)
+    comentarios         =   models.TextField(blank=True)
+    
+    
+    def __str__(self):
+        return self.apellidos + " " + self.nombre
+    
+    class Meta:
+        ordering = ["apellidos", "nombre"]
+    
+class Calificacion(models.Model):
+    alumno      =       models.ForeignKey ( Alumno )
+    calificacion=       models.IntegerField(blank=True)
+    conv        =       models.BooleanField()
+    apro        =       models.BooleanField()
+    
