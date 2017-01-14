@@ -1,0 +1,35 @@
+{%extends 'bd/base.html' %}
+
+
+{%block contenido%}
+<h1>Estadisticas evaluacion {{num_eval}}</h1>
+<h2>Estadisticas globales</h2>
+<table border='1'>
+    
+    {% for e in estadisticas_totales%}
+    <tr>
+        <td>{{e.0}}</td> <td>{{e.1}}</td>
+    </tr>
+    {%endfor%}
+</table>
+<h2>Estadisticas con 4 o más suspensas</h2>
+<table border='1'>
+    
+    {% for e in estadisticas_con_4_o_mas%}
+    <tr>
+        <td>{{e.0}}</td> <td>{{e.1}}</td>
+    </tr>
+    {%endfor%}
+</table>
+
+<h2>Estadisticas con 3 o más suspensas</h2>
+<table border='1'>
+    
+    {% for e in estadisticas_con_3_o_mas%}
+    <tr>
+        <td>{{e.0}}</td> <td>{{e.1}}</td>
+    </tr>
+    {%endfor%}
+</table>
+
+{%endblock%}

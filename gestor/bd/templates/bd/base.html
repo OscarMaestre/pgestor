@@ -3,11 +3,38 @@
 <html>
 <head>
     <title>{%block title %}{{titulo}} {%endblock%}</title>
+    <style>
+        table{
+            border: solid 1px black;
+        }
+        td{
+            padding:5px;
+            text-align: center;
+            min-width: 50px;
+        }
+        tr:hover{
+            background-color: rgb(220, 230, 240);
+        }
+    </style>
 </head>
 
 <body>
 
 {%block contenido%}
+<h1>Elige opción para actas</h1>
+<ul>
+    <li><a href='{% url 'acta' 1%}'>Acta evaluacion 1</a></li>
+    <li><a href='{% url 'acta' 2%}'>Acta evaluacion 2</a></li>
+    <li><a href='{% url 'acta' 3%}'>Acta evaluacion 3</a></li>
+</ul>
+
+<h1>Elige opción para estadisticas</h1>
+<ul>
+    <li><a href='{% url 'estadisticas' 1%}'>Estadisticas evaluacion 1</a></li>
+    <li><a href='{% url 'estadisticas' 2%}'>Estadisticas evaluacion 2</a></li>
+    <li><a href='{% url 'estadisticas' 3%}'>Estadisticas evaluacion 3</a></li>
+</ul>
+
 {%endblock%}
 
 </body>
