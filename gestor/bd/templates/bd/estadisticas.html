@@ -8,18 +8,24 @@
     
     {% for e in estadisticas_totales%}
     <tr>
-        <td>{{e.0}}</td> <td>{{e.1}}</td>
+        <td>{{e.0}}</td> <td>{{e.1}}</td> <td>{{e.2}}%</td>
     </tr>
     {%endfor%}
+    <tfoot>
+        <tr><td>Total alumnos</td><td>{{total_alumnos}}</td><td>100%</td></tr>
+    </tfoot>
 </table>
 <h2>Estadisticas con 4 o más suspensas</h2>
 <table border='1'>
     
     {% for e in estadisticas_con_4_o_mas%}
     <tr>
-        <td>{{e.0}}</td> <td>{{e.1}}</td>
+        <td>{{e.0}}</td> <td>{{e.1}}</td> <td>{{e.2}}%</td>
     </tr>
     {%endfor%}
+    <tfoot>
+        <tr><td>Total alumnos</td><td>{{total_alumnos}}</td><td>100%</td></tr>
+    </tfoot>
 </table>
 
 <h2>Estadisticas con 3 o más suspensas</h2>
@@ -27,9 +33,12 @@
     
     {% for e in estadisticas_con_3_o_mas%}
     <tr>
-        <td>{{e.0}}</td> <td>{{e.1}}</td>
+        <td>{{e.0}}</td> <td>{{e.1}}</td> <td>{{e.2}}%</td>
     </tr>
     {%endfor%}
+    <tfoot>
+        <tr><td>Total alumnos</td><td>{{total_alumnos}}</td><td>100%</td></tr>
+    </tfoot>
 </table>
 
 {%endblock%}

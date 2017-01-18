@@ -102,10 +102,12 @@ class Alumno(models.Model):
         ordering = ["apellidos", "nombre"]
     
 class Calificacion(models.Model):
-    alumno      =       models.ForeignKey ( Alumno )
-    modulo      =       models.ForeignKey( Modulo )
-    calificacion=       models.IntegerField(blank=True, null=True)
-    conv        =       models.NullBooleanField()
-    apro        =       models.NullBooleanField()
-    ev          =       models.IntegerField()
+    alumno          =       models.ForeignKey ( Alumno )
+    modulo          =       models.ForeignKey( Modulo )
+    calificacion    =       models.IntegerField(blank=True, null=True)
+    conv            =       models.NullBooleanField()
+    apro            =       models.NullBooleanField()
+    sin_matricula   =       models.NullBooleanField()
+    ev              =       models.IntegerField()
+    
     

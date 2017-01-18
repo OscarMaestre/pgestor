@@ -12,6 +12,7 @@ configurador.activar_configuracion("gestor.settings")
 
 from bd.models import Alumno, Modulo, Calificacion
 from constantes import *
+from django.db import transaction
 re_nombre="(?P<nombre>[A-Za-zÁÉÍÓÚáéíóúÑñ\- ]+, [A-Za-zÁÉÍÓÚáéíóúÑñ\- ]+)"
 re_calificaciones="(CONV|APRO|[0-9]+)"
 
@@ -61,6 +62,10 @@ def procesar_posible_alumno(linea):
         fin=tupla[1]
         modulo_asociado=tupla[2]
         nota=linea[ini:fin].strip()
+        if nota=="":
+            c=Calificacion(alumno=modelo_alumno, sin_matricula=True, ev=evaluacion, modulo=modulo_asociado)
+            c.save()
+            continue
         if nota=="CONV":
             c=Calificacion(alumno=modelo_alumno, conv=True, ev=evaluacion, modulo=modulo_asociado)
             c.save()
@@ -104,5 +109,6 @@ def procesar_acta(fichero, num_eval):
         procesador.siguiente_fila()
         linea=procesador.get_linea_actual()
 if __name__ == '__main__':
-    Calificacion.objects.filter(ev=sys.argv[2]).delete()
-    procesar_acta(sys.argv[1], sys.argv[2])
+    #Calificacion.objects.filter(ev=sys.argv[2]).delete()
+    with transaction.atomic():
+        procesar_acta(sys.argv[1], sys.argv[2])
